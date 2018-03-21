@@ -1,0 +1,4404 @@
+openapi: 3.0.0
+info:
+  title: Deployed APIs
+  version: 1.0.0
+servers:
+- url: http://localhost:9080/openapi-jaxrs-example
+paths:
+  /actions:
+    post:
+      operationId: performAction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionBean'
+      responses:
+        default:
+          description: default response
+  /currentuser/planorgs:
+    get:
+      operationId: getPlanOrganizations
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationSummaryBean'
+  /currentuser/info:
+    get:
+      operationId: getInfo
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUserBean'
+    put:
+      operationId: updateInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserBean'
+      responses:
+        default:
+          description: default response
+  /currentuser/apiorgs:
+    get:
+      operationId: getApiOrganizations
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationSummaryBean'
+  /currentuser/clientorgs:
+    get:
+      operationId: getClientOrganizations
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationSummaryBean'
+  /currentuser/apis:
+    get:
+      operationId: getApis
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiSummaryBean'
+  /currentuser/clients:
+    get:
+      operationId: getClients
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientSummaryBean'
+  /downloads/{downloadId}:
+    get:
+      operationId: download
+      parameters:
+      - name: downloadId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /gateways/{gatewayId}:
+    get:
+      operationId: get
+      parameters:
+      - name: gatewayId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayBean'
+    put:
+      operationId: update
+      parameters:
+      - name: gatewayId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGatewayBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: delete
+      parameters:
+      - name: gatewayId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /gateways:
+    get:
+      operationId: list
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GatewaySummaryBean'
+    put:
+      operationId: test
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGatewayBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTestResultBean'
+    post:
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGatewayBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayBean'
+  /organizations/{organizationId}:
+    get:
+      operationId: get
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationBean'
+    put:
+      operationId: update
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: delete
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /organizations:
+    post:
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrganizationBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationBean'
+  /organizations/{organizationId}/roles:
+    post:
+      operationId: grant
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantRolesBean'
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/apis/{apiId}:
+    get:
+      operationId: getApi
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiBean'
+    put:
+      operationId: updateApi
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: deleteApi
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/apis:
+    get:
+      operationId: listApi
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiSummaryBean'
+    post:
+      operationId: createApi
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApiBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiBean'
+  /organizations/{organizationId}/plans/{planId}:
+    get:
+      operationId: getPlan
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanBean'
+    put:
+      operationId: updatePlan
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlanBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: deletePlan
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/clients/{clientId}:
+    get:
+      operationId: getClient
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientBean'
+    put:
+      operationId: updateClient
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateClientBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: deleteClient
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/metrics/usage:
+    get:
+      operationId: getUsage
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: interval
+        in: query
+        schema:
+          type: string
+          enum:
+          - month
+          - week
+          - day
+          - hour
+          - minute
+      - name: from
+        in: query
+        schema:
+          type: string
+      - name: to
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageHistogramBean'
+  /organizations/{organizationId}/activity:
+    get:
+      operationId: activity
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: count
+        in: query
+        schema:
+          type: integer
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanAuditEntryBean'
+  /organizations/{organizationId}/roles/{roleId}/{userId}:
+    delete:
+      operationId: revoke
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/clients:
+    get:
+      operationId: listClients
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientSummaryBean'
+    post:
+      operationId: createClient
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewClientBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientBean'
+  /organizations/{organizationId}/clients/{clientId}/activity:
+    get:
+      operationId: getClientActivity
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: count
+        in: query
+        schema:
+          type: integer
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanAuditEntryBean'
+  /organizations/{organizationId}/clients/{clientId}/versions:
+    get:
+      operationId: listClientVersions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientVersionSummaryBean'
+    post:
+      operationId: createClientVersion
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewClientVersionBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientVersionBean'
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}/apikey:
+    get:
+      operationId: getClientApiKey
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyBean'
+    put:
+      operationId: updateClientApiKey
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyBean'
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}:
+    get:
+      operationId: getClientVersion
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientVersionBean'
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}/activity:
+    get:
+      operationId: getClientVersionActivity
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: count
+        in: query
+        schema:
+          type: integer
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanAuditEntryBean'
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}/metrics/apiUsage:
+    get:
+      operationId: getClientUsagePerApi
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: from
+        in: query
+        schema:
+          type: string
+      - name: to
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientUsagePerApiBean'
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}/contracts:
+    get:
+      operationId: getClientVersionContracts
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContractSummaryBean'
+    post:
+      operationId: createContract
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewContractBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractBean'
+    delete:
+      operationId: deleteAllContracts
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}/contracts/{contractId}:
+    get:
+      operationId: getContract
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: contractId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractBean'
+    delete:
+      operationId: deleteContract
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: contractId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}/apiregistry/json:
+    get:
+      operationId: getApiRegistryJSON
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: download
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}/apiregistry/xml:
+    get:
+      operationId: getApiRegistryXML
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: download
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}/policies:
+    get:
+      operationId: listClientPolicies
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PolicySummaryBean'
+    post:
+      operationId: createClientPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPolicyBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyBean'
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}/policies/{policyId}:
+    get:
+      operationId: getClientPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyBean'
+    put:
+      operationId: updateClientPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePolicyBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: deleteClientPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/clients/{clientId}/versions/{version}/reorderPolicies:
+    post:
+      operationId: reorderClientPolicies
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyChainBean'
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/apis/{apiId}/activity:
+    get:
+      operationId: getApiActivity
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: count
+        in: query
+        schema:
+          type: integer
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanAuditEntryBean'
+  /organizations/{organizationId}/apis/{apiId}/versions:
+    get:
+      operationId: listApiVersions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiVersionSummaryBean'
+    post:
+      operationId: createApiVersion
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApiVersionBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiVersionBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}:
+    get:
+      operationId: getApiVersion
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiVersionBean'
+    put:
+      operationId: updateApiVersion
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiVersionBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiVersionBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/status:
+    get:
+      operationId: getApiVersionStatus
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiVersionStatusBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/definition:
+    get:
+      operationId: getApiDefinition
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+    put:
+      operationId: updateApiDefinition
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+    post:
+      operationId: updateApiDefinitionFromURL
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApiDefinitionBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: deleteApiDefinition
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/endpoint:
+    get:
+      operationId: getApiVersionEndpointInfo
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiVersionEndpointSummaryBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/activity:
+    get:
+      operationId: getApiVersionActivity
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: count
+        in: query
+        schema:
+          type: integer
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanAuditEntryBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/plans:
+    get:
+      operationId: getApiVersionPlans
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiPlanSummaryBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/policies:
+    get:
+      operationId: listApiPolicies
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PolicySummaryBean'
+    post:
+      operationId: createApiPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPolicyBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/policies/{policyId}:
+    get:
+      operationId: getApiPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyBean'
+    put:
+      operationId: updateApiPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePolicyBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: deleteApiPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/reorderPolicies:
+    post:
+      operationId: reorderApiPolicies
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyChainBean'
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/plans/{planId}/policyChain:
+    get:
+      operationId: getApiPolicyChain
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyChainBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/contracts:
+    get:
+      operationId: getApiVersionContracts
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: count
+        in: query
+        schema:
+          type: integer
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContractSummaryBean'
+  /organizations/{organizationId}/plans:
+    get:
+      operationId: listPlans
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlanSummaryBean'
+    post:
+      operationId: createPlan
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPlanBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanBean'
+  /organizations/{organizationId}/plans/{planId}/activity:
+    get:
+      operationId: getPlanActivity
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: count
+        in: query
+        schema:
+          type: integer
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanAuditEntryBean'
+  /organizations/{organizationId}/plans/{planId}/versions:
+    get:
+      operationId: listPlanVersions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlanVersionSummaryBean'
+    post:
+      operationId: createPlanVersion
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPlanVersionBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanVersionBean'
+  /organizations/{organizationId}/plans/{planId}/versions/{version}:
+    get:
+      operationId: getPlanVersion
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanVersionBean'
+  /organizations/{organizationId}/plans/{planId}/versions/{version}/activity:
+    get:
+      operationId: getPlanVersionActivity
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: count
+        in: query
+        schema:
+          type: integer
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanAuditEntryBean'
+  /organizations/{organizationId}/plans/{planId}/versions/{version}/policies:
+    get:
+      operationId: listPlanPolicies
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PolicySummaryBean'
+    post:
+      operationId: createPlanPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPolicyBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyBean'
+  /organizations/{organizationId}/plans/{planId}/versions/{version}/policies/{policyId}:
+    get:
+      operationId: getPlanPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyBean'
+    put:
+      operationId: updatePlanPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePolicyBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: deletePlanPolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/plans/{planId}/versions/{version}/reorderPolicies:
+    post:
+      operationId: reorderPlanPolicies
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyChainBean'
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/members/{userId}:
+    delete:
+      operationId: revokeAll
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /organizations/{organizationId}/members:
+    get:
+      operationId: listMembers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemberBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/metrics/clientUsage:
+    get:
+      operationId: getUsagePerClient
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: from
+        in: query
+        schema:
+          type: string
+      - name: to
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsagePerClientBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/metrics/planUsage:
+    get:
+      operationId: getUsagePerPlan
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: from
+        in: query
+        schema:
+          type: string
+      - name: to
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsagePerPlanBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/metrics/responseStats:
+    get:
+      operationId: getResponseStats
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: interval
+        in: query
+        schema:
+          type: string
+          enum:
+          - month
+          - week
+          - day
+          - hour
+          - minute
+      - name: from
+        in: query
+        schema:
+          type: string
+      - name: to
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseStatsHistogramBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/metrics/summaryResponseStats:
+    get:
+      operationId: getResponseStatsSummary
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: from
+        in: query
+        schema:
+          type: string
+      - name: to
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseStatsSummaryBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/metrics/clientResponseStats:
+    get:
+      operationId: getResponseStatsPerClient
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: from
+        in: query
+        schema:
+          type: string
+      - name: to
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseStatsPerClientBean'
+  /organizations/{organizationId}/apis/{apiId}/versions/{version}/metrics/planResponseStats:
+    get:
+      operationId: getResponseStatsPerPlan
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: apiId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: from
+        in: query
+        schema:
+          type: string
+      - name: to
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseStatsPerPlanBean'
+  /permissions/{userId}:
+    get:
+      operationId: getPermissionsForUser
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPermissionsBean'
+  /permissions:
+    get:
+      operationId: getPermissionsForCurrentUser
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPermissionsBean'
+  /plugins/{pluginId}:
+    get:
+      operationId: get
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginBean'
+    delete:
+      operationId: delete
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+  /plugins:
+    get:
+      operationId: list
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PluginSummaryBean'
+    post:
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPluginBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginBean'
+  /plugins/{pluginId}/policyDefs:
+    get:
+      operationId: getPolicyDefs
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PolicyDefinitionSummaryBean'
+  /plugins/{pluginId}/policyDefs/{policyDefId}/form:
+    get:
+      operationId: getPolicyForm
+      parameters:
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: policyDefId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: string
+  /plugins/availablePlugins:
+    get:
+      operationId: getAvailablePlugins
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PluginSummaryBean'
+  /policyDefs/{policyDefinitionId}:
+    get:
+      operationId: get
+      parameters:
+      - name: policyDefinitionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyDefinitionBean'
+    put:
+      operationId: update
+      parameters:
+      - name: policyDefinitionId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UpdatePolicyDefinitionBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: delete
+      parameters:
+      - name: policyDefinitionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /policyDefs:
+    get:
+      operationId: list
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PolicyDefinitionSummaryBean'
+    post:
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyDefinitionBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyDefinitionBean'
+  /roles/{roleId}:
+    get:
+      operationId: get
+      parameters:
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleBean'
+    put:
+      operationId: update
+      parameters:
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoleBean'
+      responses:
+        default:
+          description: default response
+    delete:
+      operationId: delete
+      parameters:
+      - name: roleId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /roles:
+    get:
+      operationId: list
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleBean'
+    post:
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRoleBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleBean'
+  /roles/search:
+    post:
+      operationId: search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCriteriaBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanRoleBean'
+  /search/organizations:
+    post:
+      operationId: searchOrgs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCriteriaBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanOrganizationSummaryBean'
+  /search/clients:
+    post:
+      operationId: searchClients
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCriteriaBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanClientSummaryBean'
+  /search/apis:
+    post:
+      operationId: searchApis
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCriteriaBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanApiSummaryBean'
+  /search/apiCatalog/entries:
+    post:
+      operationId: searchApiCatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCriteriaBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanAvailableApiBean'
+  /search/apiCatalog/namespaces:
+    get:
+      operationId: getApiNamespaces
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiNamespaceBean'
+  /system/status:
+    get:
+      operationId: getStatus
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemStatusBean'
+  /system/export:
+    get:
+      operationId: exportData
+      parameters:
+      - name: download
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+  /system/import:
+    post:
+      operationId: importData
+      responses:
+        default:
+          description: default response
+  /users/{userId}:
+    get:
+      operationId: get
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserBean'
+    put:
+      operationId: update
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserBean'
+      responses:
+        default:
+          description: default response
+  /users/search:
+    post:
+      operationId: search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCriteriaBean'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanUserBean'
+  /users/{userId}/apis:
+    get:
+      operationId: getApis
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiSummaryBean'
+  /users/{userId}/organizations:
+    get:
+      operationId: getOrganizations
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationSummaryBean'
+  /users/{userId}/clients:
+    get:
+      operationId: getClients
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientSummaryBean'
+  /users/{userId}/activity:
+    get:
+      operationId: getActivity
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: count
+        in: query
+        schema:
+          type: integer
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsBeanAuditEntryBean'
+components:
+  schemas:
+    ClientVersionBean:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        client:
+          $ref: '#/components/schemas/ClientBean'
+        status:
+          type: string
+          enum:
+          - Created
+          - Ready
+          - Registered
+          - Retired
+        version:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedOn:
+          type: string
+          format: date-time
+        publishedOn:
+          type: string
+          format: date-time
+        retiredOn:
+          type: string
+          format: date-time
+        apikey:
+          type: string
+    UsagePerPlanBean:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+    PolicySummaryBean:
+      type: object
+      properties:
+        policyDefinitionId:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+    NewRoleBean:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        autoGrant:
+          type: boolean
+        permissions:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - orgView
+            - orgEdit
+            - orgAdmin
+            - apiView
+            - apiEdit
+            - apiAdmin
+            - clientView
+            - clientEdit
+            - clientAdmin
+            - planView
+            - planEdit
+            - planAdmin
+    NewOrganizationBean:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    ResponseStatsDataPoint:
+      type: object
+      properties:
+        label:
+          type: string
+        total:
+          type: integer
+          format: int64
+        failures:
+          type: integer
+          format: int64
+        errors:
+          type: integer
+          format: int64
+    RoleBean:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        autoGrant:
+          type: boolean
+        permissions:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - orgView
+            - orgEdit
+            - orgAdmin
+            - apiView
+            - apiEdit
+            - apiAdmin
+            - clientView
+            - clientEdit
+            - clientAdmin
+            - planView
+            - planEdit
+            - planAdmin
+    PlanSummaryBean:
+      type: object
+      properties:
+        organizationId:
+          type: string
+        organizationName:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+    UpdateClientBean:
+      type: object
+      properties:
+        description:
+          type: string
+    ActionBean:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - publishAPI
+          - retireAPI
+          - registerClient
+          - unregisterClient
+          - lockPlan
+        organizationId:
+          type: string
+        entityId:
+          type: string
+        entityVersion:
+          type: string
+    SearchResultsBeanAuditEntryBean:
+      type: object
+      properties:
+        beans:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEntryBean'
+        totalSize:
+          type: integer
+    NewApiVersionBean:
+      type: object
+      properties:
+        version:
+          type: string
+        clone:
+          type: boolean
+        cloneVersion:
+          type: string
+        endpoint:
+          type: string
+        endpointType:
+          type: string
+          enum:
+          - rest
+          - soap
+        endpointContentType:
+          type: string
+          enum:
+          - json
+          - xml
+        publicAPI:
+          type: boolean
+        parsePayload:
+          type: boolean
+        plans:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiPlanBean'
+        definitionUrl:
+          type: string
+        definitionType:
+          type: string
+          enum:
+          - None
+          - SwaggerJSON
+          - SwaggerYAML
+          - WSDL
+          - WADL
+          - RAML
+          - External
+    PlanVersionBean:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        plan:
+          $ref: '#/components/schemas/PlanBean'
+        status:
+          type: string
+          enum:
+          - Created
+          - Ready
+          - Locked
+        version:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedOn:
+          type: string
+          format: date-time
+        lockedOn:
+          type: string
+          format: date-time
+    PolicyDefinitionTemplateBean:
+      type: object
+      properties:
+        language:
+          type: string
+        template:
+          type: string
+    ResponseStatsPerPlanBean:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ResponseStatsDataPoint'
+    SearchResultsBeanAvailableApiBean:
+      type: object
+      properties:
+        beans:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailableApiBean'
+        totalSize:
+          type: integer
+    PagingBean:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+    SearchResultsBeanApiSummaryBean:
+      type: object
+      properties:
+        beans:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiSummaryBean'
+        totalSize:
+          type: integer
+    SearchResultsBean:
+      type: object
+      properties:
+        beans:
+          type: array
+          items:
+            type: object
+        totalSize:
+          type: integer
+    ClientSummaryBean:
+      type: object
+      properties:
+        organizationId:
+          type: string
+        organizationName:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        numContracts:
+          type: integer
+    GatewayBean:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedOn:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+          - REST
+        configuration:
+          type: string
+    NewApiDefinitionBean:
+      type: object
+      properties:
+        definitionUrl:
+          type: string
+        definitionType:
+          type: string
+          enum:
+          - None
+          - SwaggerJSON
+          - SwaggerYAML
+          - WSDL
+          - WADL
+          - RAML
+          - External
+    OrganizationBean:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedOn:
+          type: string
+          format: date-time
+        plans:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanBean'
+        apis:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiBean'
+        clients:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientBean'
+    PluginBean:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        groupId:
+          type: string
+        artifactId:
+          type: string
+        version:
+          type: string
+        classifier:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        deleted:
+          type: boolean
+    StatusItemBean:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        done:
+          type: boolean
+        optional:
+          type: boolean
+        remediation:
+          type: string
+    UpdateUserBean:
+      type: object
+      properties:
+        fullName:
+          type: string
+        email:
+          type: string
+    ApiPlanSummaryBean:
+      type: object
+      properties:
+        planId:
+          type: string
+        planName:
+          type: string
+        planDescription:
+          type: string
+        version:
+          type: string
+    SearchResultsBeanUserBean:
+      type: object
+      properties:
+        beans:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBean'
+        totalSize:
+          type: integer
+    NewClientVersionBean:
+      type: object
+      properties:
+        version:
+          type: string
+        clone:
+          type: boolean
+        cloneVersion:
+          type: string
+        apiKey:
+          type: string
+    NewPluginBean:
+      type: object
+      properties:
+        groupId:
+          type: string
+        artifactId:
+          type: string
+        version:
+          type: string
+        classifier:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        upgrade:
+          type: boolean
+    PlanBean:
+      type: object
+      properties:
+        organization:
+          $ref: '#/components/schemas/OrganizationBean'
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        versions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanVersionBean'
+    ContractBean:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        client:
+          $ref: '#/components/schemas/ClientVersionBean'
+        api:
+          $ref: '#/components/schemas/ApiVersionBean'
+        plan:
+          $ref: '#/components/schemas/PlanVersionBean'
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+    ApiBean:
+      type: object
+      properties:
+        organization:
+          $ref: '#/components/schemas/OrganizationBean'
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        numPublished:
+          type: integer
+        versions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiVersionBean'
+    UpdateGatewayBean:
+      type: object
+      properties:
+        description:
+          type: string
+        type:
+          type: string
+          enum:
+          - REST
+        configuration:
+          type: string
+    PolicyDefinitionBean:
+      type: object
+      properties:
+        id:
+          type: string
+        policyImpl:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        templates:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyDefinitionTemplateBean'
+        pluginId:
+          type: integer
+          format: int64
+        formType:
+          type: string
+          enum:
+          - Default
+          - JsonSchema
+        form:
+          type: string
+        deleted:
+          type: boolean
+    NewGatewayBean:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum:
+          - REST
+        configuration:
+          type: string
+    NewPlanBean:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        initialVersion:
+          type: string
+    NewPolicyBean:
+      type: object
+      properties:
+        definitionId:
+          type: string
+        configuration:
+          type: string
+    UpdatePolicyDefinitionBean:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+    PermissionBean:
+      type: object
+      properties:
+        name:
+          type: string
+          enum:
+          - orgView
+          - orgEdit
+          - orgAdmin
+          - apiView
+          - apiEdit
+          - apiAdmin
+          - clientView
+          - clientEdit
+          - clientAdmin
+          - planView
+          - planEdit
+          - planAdmin
+        organizationId:
+          type: string
+    UsagePerClientBean:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+    PolicyDefinitionSummaryBean:
+      type: object
+      properties:
+        id:
+          type: string
+        policyImpl:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        formType:
+          type: string
+          enum:
+          - Default
+          - JsonSchema
+        pluginId:
+          type: integer
+          format: int64
+    ApiVersionBean:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        api:
+          $ref: '#/components/schemas/ApiBean'
+        status:
+          type: string
+          enum:
+          - Created
+          - Ready
+          - Published
+          - Retired
+        endpoint:
+          type: string
+        endpointType:
+          type: string
+          enum:
+          - rest
+          - soap
+        endpointContentType:
+          type: string
+          enum:
+          - json
+          - xml
+        endpointProperties:
+          type: object
+          additionalProperties:
+            type: string
+        gateways:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiGatewayBean'
+        publicAPI:
+          type: boolean
+        plans:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiPlanBean'
+        version:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedOn:
+          type: string
+          format: date-time
+        publishedOn:
+          type: string
+          format: date-time
+        retiredOn:
+          type: string
+          format: date-time
+        definitionType:
+          type: string
+          enum:
+          - None
+          - SwaggerJSON
+          - SwaggerYAML
+          - WSDL
+          - WADL
+          - RAML
+          - External
+        definition:
+          $ref: '#/components/schemas/ApiDefinitionBean'
+        parsePayload:
+          type: boolean
+    OrderByBean:
+      type: object
+      properties:
+        ascending:
+          type: boolean
+        name:
+          type: string
+    SearchCriteriaFilterBean:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        operator:
+          type: string
+          enum:
+          - bool_eq
+          - eq
+          - neq
+          - gt
+          - gte
+          - lt
+          - lte
+          - like
+    ClientBean:
+      type: object
+      properties:
+        organization:
+          $ref: '#/components/schemas/OrganizationBean'
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        versions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientVersionBean'
+    UsageHistogramBean:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageDataPoint'
+    GrantRolesBean:
+      type: object
+      properties:
+        userId:
+          type: string
+        roleIds:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    UsageDataPoint:
+      type: object
+      properties:
+        label:
+          type: string
+        count:
+          type: integer
+          format: int64
+    AuditEntryBean:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        who:
+          type: string
+        organizationId:
+          type: string
+        entityType:
+          type: string
+          enum:
+          - Organization
+          - Client
+          - Plan
+          - Api
+        entityId:
+          type: string
+        entityVersion:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        what:
+          type: string
+          enum:
+          - Create
+          - Update
+          - Delete
+          - Clone
+          - Grant
+          - Revoke
+          - Publish
+          - Retire
+          - Register
+          - Unregister
+          - AddPolicy
+          - RemovePolicy
+          - UpdatePolicy
+          - ReorderPolicies
+          - CreateContract
+          - BreakContract
+          - Lock
+          - UpdateDefinition
+          - DeleteDefinition
+        data:
+          type: string
+    NewPlanVersionBean:
+      type: object
+      properties:
+        version:
+          type: string
+        clone:
+          type: boolean
+        cloneVersion:
+          type: string
+    UpdateApiVersionBean:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        endpointType:
+          type: string
+          enum:
+          - rest
+          - soap
+        endpointContentType:
+          type: string
+          enum:
+          - json
+          - xml
+        endpointProperties:
+          type: object
+          additionalProperties:
+            type: string
+        gateways:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiGatewayBean'
+        parsePayload:
+          type: boolean
+        publicAPI:
+          type: boolean
+        plans:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiPlanBean'
+    GatewaySummaryBean:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum:
+          - REST
+    NewApiBean:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        initialVersion:
+          type: string
+        endpoint:
+          type: string
+        endpointType:
+          type: string
+          enum:
+          - rest
+          - soap
+        endpointContentType:
+          type: string
+          enum:
+          - json
+          - xml
+        publicAPI:
+          type: boolean
+        parsePayload:
+          type: boolean
+        plans:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiPlanBean'
+        definitionUrl:
+          type: string
+        definitionType:
+          type: string
+          enum:
+          - None
+          - SwaggerJSON
+          - SwaggerYAML
+          - WSDL
+          - WADL
+          - RAML
+          - External
+    ApiKeyBean:
+      type: object
+      properties:
+        apiKey:
+          type: string
+    SearchResultsBeanOrganizationSummaryBean:
+      type: object
+      properties:
+        beans:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationSummaryBean'
+        totalSize:
+          type: integer
+    MemberBean:
+      type: object
+      properties:
+        userId:
+          type: string
+        userName:
+          type: string
+        email:
+          type: string
+        joinedOn:
+          type: string
+          format: date-time
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemberRoleBean'
+    ResponseStatsPerClientBean:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ResponseStatsDataPoint'
+    ApiGatewayBean:
+      type: object
+      properties:
+        gatewayId:
+          type: string
+    UserBean:
+      type: object
+      properties:
+        username:
+          type: string
+        fullName:
+          type: string
+        email:
+          type: string
+        joinedOn:
+          type: string
+          format: date-time
+        admin:
+          type: boolean
+    SearchCriteriaBean:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchCriteriaFilterBean'
+        orderBy:
+          $ref: '#/components/schemas/OrderByBean'
+        paging:
+          $ref: '#/components/schemas/PagingBean'
+    MemberRoleBean:
+      type: object
+      properties:
+        roleId:
+          type: string
+        roleName:
+          type: string
+    ApiSummaryBean:
+      type: object
+      properties:
+        organizationId:
+          type: string
+        organizationName:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+    AvailableApiBean:
+      type: object
+      properties:
+        id:
+          type: string
+        icon:
+          type: string
+        endpoint:
+          type: string
+        routeEndpoint:
+          type: string
+        endpointType:
+          type: string
+          enum:
+          - rest
+          - soap
+        name:
+          type: string
+        description:
+          type: string
+        definitionUrl:
+          type: string
+        routeDefinitionUrl:
+          type: string
+        definitionType:
+          type: string
+          enum:
+          - None
+          - SwaggerJSON
+          - SwaggerYAML
+          - WSDL
+          - WADL
+          - RAML
+          - External
+        namespace:
+          type: string
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        internal:
+          type: boolean
+    PolicyChainBean:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicySummaryBean'
+    PluginSummaryBean:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        groupId:
+          type: string
+        artifactId:
+          type: string
+        version:
+          type: string
+        classifier:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+    ApiNamespaceBean:
+      type: object
+      properties:
+        name:
+          type: string
+        ownedByUser:
+          type: boolean
+        current:
+          type: boolean
+    ResponseStatsHistogramBean:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseStatsDataPoint'
+    ApiPlanBean:
+      type: object
+      properties:
+        planId:
+          type: string
+        version:
+          type: string
+    PolicyBean:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum:
+          - Client
+          - Plan
+          - Api
+        organizationId:
+          type: string
+        entityId:
+          type: string
+        entityVersion:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        configuration:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+        modifiedOn:
+          type: string
+          format: date-time
+        definition:
+          $ref: '#/components/schemas/PolicyDefinitionBean'
+        orderIndex:
+          type: integer
+    ApiVersionStatusBean:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Created
+          - Ready
+          - Published
+          - Retired
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItemBean'
+    GatewayTestResultBean:
+      type: object
+      properties:
+        success:
+          type: boolean
+        detail:
+          type: string
+    ResponseStatsSummaryBean:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int64
+        failures:
+          type: integer
+          format: int64
+        errors:
+          type: integer
+          format: int64
+    UserPermissionsBean:
+      type: object
+      properties:
+        userId:
+          type: string
+        permissions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionBean'
+    NewClientBean:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        initialVersion:
+          type: string
+    SearchResultsBeanClientSummaryBean:
+      type: object
+      properties:
+        beans:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientSummaryBean'
+        totalSize:
+          type: integer
+    CurrentUserBean:
+      type: object
+      properties:
+        username:
+          type: string
+        fullName:
+          type: string
+        email:
+          type: string
+        joinedOn:
+          type: string
+          format: date-time
+        admin:
+          type: boolean
+        permissions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionBean'
+    PlanVersionSummaryBean:
+      type: object
+      properties:
+        organizationId:
+          type: string
+        organizationName:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - Created
+          - Ready
+          - Locked
+        version:
+          type: string
+    OrganizationSummaryBean:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        numClients:
+          type: integer
+        numApis:
+          type: integer
+        numMembers:
+          type: integer
+    ApiVersionSummaryBean:
+      type: object
+      properties:
+        organizationId:
+          type: string
+        organizationName:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - Created
+          - Ready
+          - Published
+          - Retired
+        version:
+          type: string
+        publicAPI:
+          type: boolean
+    ApiDefinitionBean:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        apiVersion:
+          $ref: '#/components/schemas/ApiVersionBean'
+        data:
+          type: array
+          items:
+            type: string
+            format: base64
+    NewContractBean:
+      type: object
+      properties:
+        apiOrgId:
+          type: string
+        apiId:
+          type: string
+        apiVersion:
+          type: string
+        planId:
+          type: string
+    ApiVersionEndpointSummaryBean:
+      type: object
+      properties:
+        managedEndpoint:
+          type: string
+    UpdateApiBean:
+      type: object
+      properties:
+        description:
+          type: string
+    UpdateRoleBean:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        autoGrant:
+          type: boolean
+        permissions:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - orgView
+            - orgEdit
+            - orgAdmin
+            - apiView
+            - apiEdit
+            - apiAdmin
+            - clientView
+            - clientEdit
+            - clientAdmin
+            - planView
+            - planEdit
+            - planAdmin
+    UpdatePolicyBean:
+      type: object
+      properties:
+        configuration:
+          type: string
+    SearchResultsBeanRoleBean:
+      type: object
+      properties:
+        beans:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleBean'
+        totalSize:
+          type: integer
+    SystemStatusBean:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        moreInfo:
+          type: string
+        version:
+          type: string
+        builtOn:
+          type: string
+        up:
+          type: boolean
+    ContractSummaryBean:
+      type: object
+      properties:
+        contractId:
+          type: integer
+          format: int64
+        clientOrganizationId:
+          type: string
+        clientOrganizationName:
+          type: string
+        clientId:
+          type: string
+        clientName:
+          type: string
+        clientVersion:
+          type: string
+        apiOrganizationId:
+          type: string
+        apiOrganizationName:
+          type: string
+        apiId:
+          type: string
+        apiName:
+          type: string
+        apiVersion:
+          type: string
+        apiDescription:
+          type: string
+        planName:
+          type: string
+        planId:
+          type: string
+        planVersion:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+    UpdateOrganizationBean:
+      type: object
+      properties:
+        description:
+          type: string
+    ClientUsagePerApiBean:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+    UpdatePlanBean:
+      type: object
+      properties:
+        description:
+          type: string
+    ClientVersionSummaryBean:
+      type: object
+      properties:
+        organizationId:
+          type: string
+        organizationName:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - Created
+          - Ready
+          - Registered
+          - Retired
+        version:
+          type: string
+        apiKey:
+          type: string
